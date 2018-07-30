@@ -1,0 +1,64 @@
+<html>
+<header>
+  <title>AngularJs in Action Documentation</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="./dist/index.js"></script>
+</header>
+<body ng-app="myApp" ng-controller="filtersController">
+  <h2 class="text-center"> Documentation of Filters</h2>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <!-- $filter from controller -->
+      <document-section data-title="$filter from Controller">
+        Not filtered: {{name}}<br>
+        Filtered UpperCase: {{filteredNameUpper}}<br>
+        Filtered LowerCase: {{filteredNameLower}}<br>
+      </document-section>
+
+      <!-- binding filter into HTML-->
+      <document-section data-title="Applying filter into HTML">
+        Not filtered: {{unfilteredName}}<br>
+        Filtered UpperCase: {{unfilteredName | uppercase}}<br>
+        Filtered LowerCase: {{unfilteredName | lowercase}}<br>
+        Filtered Ammount: {{ammount | currency:'$':2}}<br>
+      </document-section>
+
+      <!-- searching using filter -->
+      <document-section data-title="Using filter to Filter Result Out">
+        Search all: <input type="text" ng-model="textToSearch.$"><br>
+        Search State: <input type="text" ng-model="textToSearch.state">
+        <div ng-repeat="d in data | filter:textToSearch">
+          {{d.name}} - {{d.state}}
+        </div>
+      </document-section>
+
+      <!-- soting using filter -->
+      <document-section data-title="Using filter to Sort">
+        <select ng-model="sortBy">
+          <option value='name'>Name</option>
+          <option value='state'>State</option>
+        </select>
+        <div ng-repeat="d in data | orderBy:sortBy">
+          {{d.name}} - {{d.state}}
+        </div>
+      </document-section>
+
+      <!-- creating custom filter -->
+      <document-section data-title="Creating Custom Filter">
+        <h3> Filter NOT applied </h3>
+        <div ng-repeat="d in data">
+          {{d.id}} - {{d.name}} - {{d.state}}
+        </div>
+        <br>
+        <h3> Filter APPLIED </h3>
+        <div ng-repeat="d in data">
+          {{d.id | internalId}} - {{d.name}} - {{d.state}}
+        </div>
+      </document-section>
+
+    </div>
+  </div>
+</body>
+</html>
